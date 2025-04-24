@@ -5,6 +5,7 @@ public class Playermovement : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
    Rigidbody2D rb2d;
+   Vector2 moveinput;
    float move;
    [SerializeField] float speed;
    [SerializeField] float jumpForce;
@@ -17,8 +18,8 @@ public class Playermovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       move = Input.GetAxis("Horizontal"); 
-       rb2d.velocity = new Vector2(move * speed, rb2d.velocity.y);
+      moveinput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+      rb2d.AddForce(moveinput * speed );
        if (Input.GetButtonDown("Jump") && !isJumping)
        {
          rb2d.AddForce(new Vector2(rb2d.velocity.x, jumpForce));  
